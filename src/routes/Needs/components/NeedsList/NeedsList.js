@@ -11,6 +11,7 @@ import { useNotifications } from 'modules/notification'
 import LoadingSpinner from 'components/LoadingSpinner'
 import NeedTile from '../NeedTile'
 import NewNeedTile from '../NewNeedTile'
+import NewNeedTable from '../NewNeedTable'
 import NewNeedDialog from '../NewNeedDialog'
 import styles from './NeedsList.styles'
 import { usePosition } from 'use-position'
@@ -105,6 +106,7 @@ function NeedsList() {
               />
             )
           })}
+          <NewNeedTable needs={needs} />
       </div>
     </div>
   )
