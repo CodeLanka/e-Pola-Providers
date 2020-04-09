@@ -7,23 +7,27 @@ import SignupRoute from './Signup'
 import NeedsRoute from './Needs'
 import AccountRoute from './Account'
 import NotFoundRoute from './NotFound'
+import AboutRoute from './About'
 
 export default function createRoutes(store) {
   return (
     <CoreLayout>
       <Switch>
         <Route exact path={Home.path} component={() => <Home.component />} />
-        {/* Build Route components from routeSettings */
-        [
-          AccountRoute,
-          NeedsRoute,
-          NeedsRoute,
-          SignupRoute,
-          LoginRoute
-          /* Add More Routes Here */
-        ].map((settings, index) => (
-          <Route key={`Route-${settings.path}`} {...settings} />
-        ))}
+        {
+          /* Build Route components from routeSettings */
+          [
+            AccountRoute,
+            NeedsRoute,
+            NeedsRoute,
+            SignupRoute,
+            LoginRoute,
+            AboutRoute
+            /* Add More Routes Here */
+          ].map((settings, index) => (
+            <Route key={`Route-${settings.path}`} {...settings} />
+          ))
+        }
         <Route component={NotFoundRoute.component} />
       </Switch>
     </CoreLayout>
