@@ -10,6 +10,6 @@ export default (theme) => ({
     width: '100%'
   },
   buttons: {
-    ...theme.flexColumnCenter,
+    ...theme.flexColumnCenter
   }
 })
