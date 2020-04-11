@@ -8,9 +8,15 @@ import {
 import { useSelector } from 'react-redux'
 // import { useNotifications } from 'modules/notification'
 import LoadingSpinner from 'components/LoadingSpinner'
+import TabPanel from '../TabPanel'
 import NewNeedTable from '../NewNeedTable'
 import styles from './NeedsList.styles'
 import { usePosition } from 'use-position'
+import AppBar from '@material-ui/core/AppBar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import PhoneIcon from '@material-ui/icons/Phone'
+import MapIcon from '@material-ui/icons/Map'
 
 const useStyles = makeStyles(styles)
 
@@ -66,6 +72,11 @@ function NeedsList() {
   const classes = useStyles()
   const { needs, location } = useNeedsList()
   const rows = needs ? createAllData(needs) : []
+  const [tab, setTab] = React.useState(0)
+
+  const handleChange = (event, newTab) => {
+    setTab(newTab)
+  }
 
   // Show spinner while needs are loading
   if (!isLoaded(needs)) {
@@ -74,7 +85,24 @@ function NeedsList() {
 
   return (
     <div className={classes.root}>
-      <NewNeedTable needs={rows} location={location} />
+      <AppBar position="static" color="transparent">
+        <Tabs
+          value={tab}
+          onChange={handleChange}
+          variant="fullWidth"
+          indicatorColor="secondary"
+          textColor="secondary"
+          aria-label="icon label tabs example">
+          <Tab icon={<PhoneIcon />} label="RECENTS" />
+          <Tab icon={<MapIcon />} label="NEARBY" />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={tab} index={0}>
+        <NewNeedTable needs={rows} location={location} />
+      </TabPanel>
+      <TabPanel value={tab} index={1}>
+        Item Two
+      </TabPanel>
     </div>
   )
 }
