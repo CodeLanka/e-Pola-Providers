@@ -1,41 +1,36 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
-  useFirestore,
+  // useFirestore,
   useFirestoreConnect,
-  isLoaded,
-  isEmpty
+  isLoaded
 } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
-import { useNotifications } from 'modules/notification'
+// import { useNotifications } from 'modules/notification'
 import LoadingSpinner from 'components/LoadingSpinner'
-import NeedTile from '../NeedTile'
-import NewNeedTile from '../NewNeedTile'
 import NewNeedTable from '../NewNeedTable'
-import NewNeedDialog from '../NewNeedDialog'
 import styles from './NeedsList.styles'
 import { usePosition } from 'use-position'
 
 const useStyles = makeStyles(styles)
 
 function useNeedsList() {
-  const { showSuccess, showError } = useNotifications()
-  const firestore = useFirestore()
-  let lat = ''
-  let lon = ''
+  // const { showSuccess, showError } = useNotifications()
+  // const firestore = useFirestore()
 
   // Get auth from redux state
   const auth = useSelector(({ firebase: { auth, profile } }) => auth)
   const profile = useSelector(({ firebase: { profile } }) => profile)
   const { latitude, longitude } = usePosition()
+  const location = { lat: 0, lon: 0 }
 
   if (profile.location) {
     const { lat: latitude, lon: longitude } = profile.location
-    lat = latitude
-    lon = longitude
+    location.lat = latitude
+    location.lon = longitude
   } else if (latitude && longitude) {
-    lat = latitude
-    lon = longitude
+    location.lat = latitude
+    location.lon = longitude
   }
 
   useFirestoreConnect([
@@ -48,38 +43,29 @@ function useNeedsList() {
   // Get needs from redux state
   const needs = useSelector(({ firestore: { ordered } }) => ordered.needs)
 
-  // New dialog
-  const [newDialogOpen, changeDialogState] = useState(false)
-  const toggleDialog = () => changeDialogState(!newDialogOpen)
+  return { needs, location }
+}
 
-  function addNeed(newInstance) {
-    if (!auth.uid) {
-      return showError('You must be logged in to create a need')
-    }
-    return firestore
-      .add('needs', {
-        ...newInstance,
-        location: { lat, lon },
-        createdBy: auth.uid,
-        createdAt: firestore.FieldValue.serverTimestamp()
-      })
-      .then(() => {
-        toggleDialog()
-        showSuccess('Need added successfully')
-      })
-      .catch((err) => {
-        console.error('Error:', err) // eslint-disable-line no-console
-        showError(err.message || 'Could not add need')
-        return Promise.reject(err)
-      })
-  }
+function createData(name, amount, time, user, location) {
+  return { name, amount, time, user, location }
+}
 
-  return { needs, addNeed, newDialogOpen, toggleDialog }
+function createAllData(needs) {
+  return needs.map((need) => {
+    return createData(
+      need.name,
+      need.amount,
+      need.createdAt.seconds * 1000,
+      need.createdBy,
+      need.location
+    )
+  })
 }
 
 function NeedsList() {
   const classes = useStyles()
-  const { needs, addNeed, newDialogOpen, toggleDialog } = useNeedsList()
+  const { needs, location } = useNeedsList()
+  const rows = needs ? createAllData(needs) : []
 
   // Show spinner while needs are loading
   if (!isLoaded(needs)) {
@@ -88,26 +74,7 @@ function NeedsList() {
 
   return (
     <div className={classes.root}>
-      <NewNeedDialog
-        onSubmit={addNeed}
-        open={newDialogOpen}
-        onRequestClose={toggleDialog}
-      />
-      <div className={classes.tiles}>
-        <NewNeedTile onClick={toggleDialog} />
-        {!isEmpty(needs) &&
-          needs.map((need, ind) => {
-            return (
-              <NeedTile
-                key={`Need-${need.id}-${ind}`}
-                name={need && need.name}
-                amount={need && need.amount}
-                needId={need.id}
-              />
-            )
-          })}
-          <NewNeedTable needs={needs} />
-      </div>
+      <NewNeedTable needs={rows} location={location} />
     </div>
   )
 }
