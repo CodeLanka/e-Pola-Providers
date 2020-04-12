@@ -103,7 +103,7 @@ function AccountMenu() {
           aria-owns={anchorEl ? 'my-needs' : null}
           aria-haspopup="false"
           onClick={gotoNeeds}>
-          <Trans>My Requests</Trans>
+          <Trans>Demands</Trans>
           <AssignmentIcon className={classes.icon} />
         </Button>
         <Button

@@ -37,11 +37,8 @@ function Home() {
             }}
           />
           <Typography variant="subtitle1" gutterBottom>
-            <Trans>
-              Worried about basic rations during the curfew?
-              <br />
-              GIVEME.lk is here to voice your needs.
-            </Trans>
+            Got stuff to deliver to people? <br />
+            GiveMe.lk will help you find the people who need them.
           </Typography>
           <br />
           <Typography variant="subtitle2" gutterBottom>
@@ -76,7 +73,7 @@ function Home() {
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
             <Trans>
-              Log-in and start adding your requirements to GiveME. This is how
+              Log-in and you can get started to supply your goods. Here is how
               you do that...
             </Trans>
           </Typography>
@@ -116,7 +113,7 @@ function Home() {
                   <Trans>Step</Trans> 2
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  <Trans>You request items that you need</Trans>
+                  You set your supply areas
                 </Typography>
               </CardContent>
             </div>
@@ -135,7 +132,7 @@ function Home() {
                   <Trans>Step</Trans> 3
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  <Trans>Authorized vendors see your requirements</Trans>
+                  You get the list of locations which need produce
                 </Typography>
               </CardContent>
             </div>
@@ -154,7 +151,7 @@ function Home() {
                   <Trans>Step</Trans> 4
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  <Trans>Vendors will come and fulfill your needs.</Trans>
+                  You visit the locations and supply the items.
                 </Typography>
               </CardContent>
             </div>
