@@ -93,7 +93,7 @@ export default function MapView(props) {
               key={`need-${cluster.properties.needId}`}
               lat={latitude}
               lng={longitude}>
-              <RoomIcon />
+              <RoomIcon /> {cluster.properties.name}
             </Marker>
           )
         })}
