@@ -7,6 +7,7 @@ import {
 } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 // import { useNotifications } from 'modules/notification'
+import useSwr from 'swr'
 import LoadingSpinner from 'components/LoadingSpinner'
 import TabPanel from '../TabPanel'
 import NewNeedTable from '../NewNeedTable'
@@ -18,12 +19,16 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import TableChartIcon from '@material-ui/icons/TableChart'
 import MapIcon from '@material-ui/icons/Map'
+import fetcher from 'utils/fetcher'
 
 const useStyles = makeStyles(styles)
 
 function useNeedsList() {
   // const { showSuccess, showError } = useNotifications()
   // const firestore = useFirestore()
+  const url = 'https://api-aw4mzcvpla-uc.a.run.app/api/v1/needs'
+  const { data, error } = useSwr(url, { fetcher })
+  const needs = data && !error ? data : []
 
   // Get auth from redux state
   const auth = useSelector(({ firebase: { auth, profile } }) => auth)
@@ -48,7 +53,9 @@ function useNeedsList() {
   ])
 
   // Get needs from redux state
-  const needs = useSelector(({ firestore: { ordered } }) => ordered.needs)
+  // const needs = useSelector(({ firestore: { ordered } }) => ordered.needs)
+
+  // console.log(needs,crimes)
 
   return { needs, location }
 }
@@ -60,7 +67,7 @@ function createData(id, name, amount, time, user, location) {
 function createAllData(needs) {
   return needs.map((need) => {
     return createData(
-      need.id,
+      `id-${Math.random()}`,
       need.name,
       need.amount,
       need.createdAt.seconds * 1000,
