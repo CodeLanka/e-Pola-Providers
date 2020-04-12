@@ -7,7 +7,7 @@ import styles from './TabPanel.styles'
 const useStyles = makeStyles(styles)
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props
+  const { children, value, index, noPadding, ...other } = props
   const classes = useStyles()
 
   return (
@@ -18,7 +18,7 @@ function TabPanel(props) {
       aria-labelledby={`tab-${index}`}
       className={classes.root}
       {...other}>
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && <Box p={noPadding ? 0 : 3}>{children}</Box>}
     </Box>
   )
 }
@@ -26,7 +26,12 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
+  noPadding: PropTypes.bool.isRequired
+}
+
+TabPanel.defaultProps = {
+  noPadding: false
 }
 
 export default TabPanel

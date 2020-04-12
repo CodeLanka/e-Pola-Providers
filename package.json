@@ -63,6 +63,7 @@
     "redux-auth-wrapper": "^2.1.0",
     "redux-firestore": "^0.11.0",
     "redux-thunk": "^2.3.0",
+    "supercluster": "^7.0.0",
     "swr": "^0.2.0",
     "use-position": "^0.0.6",
     "use-supercluster": "^0.2.6"

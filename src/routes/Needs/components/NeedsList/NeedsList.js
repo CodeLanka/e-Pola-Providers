@@ -10,12 +10,13 @@ import { useSelector } from 'react-redux'
 import LoadingSpinner from 'components/LoadingSpinner'
 import TabPanel from '../TabPanel'
 import NewNeedTable from '../NewNeedTable'
+import MapView from '../MapView'
 import styles from './NeedsList.styles'
 import { usePosition } from 'use-position'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import PhoneIcon from '@material-ui/icons/Phone'
+import TableChartIcon from '@material-ui/icons/TableChart'
 import MapIcon from '@material-ui/icons/Map'
 
 const useStyles = makeStyles(styles)
@@ -52,13 +53,14 @@ function useNeedsList() {
   return { needs, location }
 }
 
-function createData(name, amount, time, user, location) {
-  return { name, amount, time, user, location }
+function createData(id, name, amount, time, user, location) {
+  return { id, name, amount, time, user, location }
 }
 
 function createAllData(needs) {
   return needs.map((need) => {
     return createData(
+      need.id,
       need.name,
       need.amount,
       need.createdAt.seconds * 1000,
@@ -93,15 +95,15 @@ function NeedsList() {
           indicatorColor="secondary"
           textColor="secondary"
           aria-label="icon label tabs example">
-          <Tab icon={<PhoneIcon />} label="RECENTS" />
-          <Tab icon={<MapIcon />} label="NEARBY" />
+          <Tab icon={<TableChartIcon />} label="Table" />
+          <Tab icon={<MapIcon />} label="Map" />
         </Tabs>
       </AppBar>
       <TabPanel value={tab} index={0}>
         <NewNeedTable needs={rows} location={location} />
       </TabPanel>
-      <TabPanel value={tab} index={1}>
-        Item Two
+      <TabPanel value={tab} index={1} noPadding>
+        <MapView needs={rows} location={location} />
       </TabPanel>
     </div>
   )
