@@ -34,6 +34,6 @@ export default (theme) => ({
     textDecoration: 'none',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   }
 })

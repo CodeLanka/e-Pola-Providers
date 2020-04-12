@@ -37,8 +37,8 @@ function Home() {
             }}
           />
           <Typography variant="subtitle1" gutterBottom>
-            Worried about basic rations during the curfew? <br />
-            GIVEME.lk is here to voice your needs.
+            Got stuff to deliver to people? <br />
+            GiveMe.lk will help you find the people who need them.
           </Typography>
           <br />
           <Typography variant="subtitle2" gutterBottom>
@@ -70,7 +70,7 @@ function Home() {
             Welcome to GIVE<strong className={classes.strong}>ME</strong>.lk!
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            Log-in and start adding your requirements to GiveME. This is how you
+            Log-in and you can get started to supply your goods. Here is how you
             do that...
           </Typography>
 
@@ -107,7 +107,7 @@ function Home() {
                   Step 2
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  You request items that you need
+                  You set your supply areas
                 </Typography>
               </CardContent>
             </div>
@@ -126,7 +126,7 @@ function Home() {
                   Step 3
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  Authorized vendors see your requirements
+                  You get the list of locations which need produce
                 </Typography>
               </CardContent>
             </div>
@@ -145,7 +145,7 @@ function Home() {
                   Step 4
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  Vendors will come and fulfill your needs.
+                  You visit the locations and supply the items.
                 </Typography>
               </CardContent>
             </div>

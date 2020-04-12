@@ -106,7 +106,7 @@ function NeedsList() {
               />
             )
           })}
-          <NewNeedTable needs={needs} />
+        <NewNeedTable needs={needs} />
       </div>
     </div>
   )

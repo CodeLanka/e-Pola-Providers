@@ -48,9 +48,7 @@ function NeedTile({ name, needId, amount, showDelete }) {
           </Tooltip>
         ) : null}
       </div>
-    <span className={classes.amount}>
-      {amount || ''}
-    </span>
+      <span className={classes.amount}>{amount || ''}</span>
     </Paper>
   )
 }
@@ -59,7 +57,7 @@ NeedTile.propTypes = {
   needId: PropTypes.string.isRequired,
   showDelete: PropTypes.bool,
   name: PropTypes.string,
-  amount: PropTypes.string,
+  amount: PropTypes.string
 }
 
 NeedTile.defaultProps = {
