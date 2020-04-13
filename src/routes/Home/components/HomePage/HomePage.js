@@ -1,14 +1,14 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
-// import { ACCOUNT_PATH, NEEDS_PATH } from 'constants/paths'
 import styles from './HomePage.styles'
 import Image from 'material-ui-image'
 import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
+import { Trans } from 'react-i18next'
 
 // const reactRouterUrl = 'https://github.com/ReactTraining/react-router'
 
@@ -42,7 +42,7 @@ function Home() {
           </Typography>
           <br />
           <Typography variant="subtitle2" gutterBottom>
-            Developed By:
+            <Trans>Developed By</Trans>:
           </Typography>
           <a
             href="http://codelanka.org"
@@ -66,12 +66,16 @@ function Home() {
           </a>
         </Grid>
         <Grid item xs={12} sm={6} className={classes.rightSide}>
-          <Typography variant="h4" gutterBottom classNAME={classes.welcome}>
-            Welcome to GIVE<strong className={classes.strong}>ME</strong>.lk!
+          <Typography variant="h4" gutterBottom className={classes.welcome}>
+            <Trans>
+              Welcome to GIVE<strong className={classes.strong}>ME</strong>.lk!
+            </Trans>
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            Log-in and you can get started to supply your goods. Here is how you
-            do that...
+            <Trans>
+              Log-in and you can get started to supply your goods. Here is how
+              you do that...
+            </Trans>
           </Typography>
 
           <Card className={classes.cardRoot}>
@@ -84,11 +88,13 @@ function Home() {
             <div>
               <CardContent className={classes.content}>
                 <Typography component="h5" variant="h5">
-                  Step 1
+                  <Trans>Step</Trans> 1
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  You log in to GIVE
-                  <strong className={classes.strong}>ME</strong>.
+                  <Trans>
+                    You log in to GIVE
+                    <strong className={classes.strong}>ME</strong>.
+                  </Trans>
                 </Typography>
               </CardContent>
             </div>
@@ -104,7 +110,7 @@ function Home() {
             <div>
               <CardContent className={classes.content}>
                 <Typography component="h5" variant="h5">
-                  Step 2
+                  <Trans>Step</Trans> 2
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
                   You set your supply areas
@@ -123,7 +129,7 @@ function Home() {
             <div>
               <CardContent className={classes.content}>
                 <Typography component="h5" variant="h5">
-                  Step 3
+                  <Trans>Step</Trans> 3
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
                   You get the list of locations which need produce
@@ -142,7 +148,7 @@ function Home() {
             <div>
               <CardContent className={classes.content}>
                 <Typography component="h5" variant="h5">
-                  Step 4
+                  <Trans>Step</Trans> 4
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
                   You visit the locations and supply the items.

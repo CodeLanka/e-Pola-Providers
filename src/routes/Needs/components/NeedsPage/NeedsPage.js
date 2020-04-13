@@ -7,12 +7,14 @@ import NeedsList from '../NeedsList'
 
 function NeedsPage({ match }) {
   return (
-    <Switch>
-      {/* Child routes */}
-      {renderChildren([NeedRoute], match)}
-      {/* Main Route */}
-      <Route exact path={match.path} render={() => <NeedsList />} />
-    </Switch>
+    <div style={{ backgroundColor: 'white' }}>
+      <Switch>
+        {/* Child routes */}
+        {renderChildren([NeedRoute], match)}
+        {/* Main Route */}
+        <Route exact path={match.path} render={() => <NeedsList />} />
+      </Switch>
+    </div>
   )
 }
 
