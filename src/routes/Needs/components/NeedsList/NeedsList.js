@@ -70,7 +70,7 @@ function createAllData(needs) {
       `id-${Math.random()}`,
       need.name,
       need.amount,
-      need.createdAt.seconds * 1000,
+      Date.parse(need.createdAt),
       need.createdBy,
       need.location
     )
