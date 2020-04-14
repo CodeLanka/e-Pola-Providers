@@ -14,14 +14,15 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Checkbox from '@material-ui/core/Checkbox'
+import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
-import DeleteIcon from '@material-ui/icons/Delete'
-import FilterListIcon from '@material-ui/icons/FilterList'
+import PrintIcon from '@material-ui/icons/Print'
 import Moment from 'react-moment'
 import RoomIcon from '@material-ui/icons/Room'
+import LocalShippingIcon from '@material-ui/icons/LocalShipping'
 
 function goToMapLocation(lat, lon) {
   return () =>
@@ -151,7 +152,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles()
-  const { numSelected } = props
+  const { numSelected, toggleassignNeedsDialog } = props
 
   return (
     <Toolbar
@@ -177,15 +178,22 @@ const EnhancedTableToolbar = (props) => {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
+        <Tooltip title="Assign for Delivery">
+          <IconButton aria-label="Assign for Delivery">
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              onClick={toggleassignNeedsDialog}
+              startIcon={<LocalShippingIcon />}>
+              Assign for Delivery
+            </Button>
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
+        <Tooltip title="Print list">
+          <IconButton aria-label="print list">
+            <PrintIcon />
           </IconButton>
         </Tooltip>
       )}
@@ -194,7 +202,8 @@ const EnhancedTableToolbar = (props) => {
 }
 
 EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired
+  numSelected: PropTypes.number.isRequired,
+  toggleassignNeedsDialog: PropTypes.func.isRequired
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -223,7 +232,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable(props) {
   // eslint-disable-next-line
-  const { needs } = props;
+  const { needs, toggleassignNeedsDialog } = props;
   const classes = useStyles()
   const [order, setOrder] = React.useState('asc')
   const [orderBy, setOrderBy] = React.useState('name')
@@ -240,7 +249,7 @@ export default function EnhancedTable(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = needs.map((n) => n.name)
+      const newSelecteds = needs.map((n) => n.id)
       setSelected(newSelecteds)
       return
     }
@@ -288,7 +297,10 @@ export default function EnhancedTable(props) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          toggleassignNeedsDialog={toggleassignNeedsDialog}
+        />
         <TableContainer>
           <Table
             className={classes.table}
@@ -308,17 +320,17 @@ export default function EnhancedTable(props) {
               {stableSort(needs, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name)
+                  const isItemSelected = isSelected(row.id)
                   const labelId = `enhanced-table-checkbox-${index}`
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}>
                       <TableCell padding="checkbox">
                         <Checkbox
@@ -376,5 +388,6 @@ export default function EnhancedTable(props) {
 }
 
 EnhancedTable.propTypes = {
-  needs: PropTypes.array.isRequired
+  needs: PropTypes.array.isRequired,
+  toggleassignNeedsDialog: PropTypes.func.isRequired
 }
