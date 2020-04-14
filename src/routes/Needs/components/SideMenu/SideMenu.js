@@ -13,6 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import groupBy from 'lodash/groupBy'
+import Image from 'material-ui-image'
 
 import styles from './SideMenu.styles'
 import * as PropTypes from 'prop-types'
@@ -35,7 +36,23 @@ function Category(props) {
   return (
     <>
       <ListItem button onClick={props.onClick}>
-        <ListItemIcon>🧀</ListItemIcon>
+        <ListItemIcon>
+          <Image
+            src={'/img/' + category + '.svg'}
+            imageStyle={{
+              width: '25px',
+              height: 'auto',
+              position: 'absolute'
+            }}
+            style={{
+              padding: '0',
+              width: '100%',
+              textAlign: 'center',
+              marginBottom: '1.5rem',
+              flexDirection: 'column'
+            }}
+          />
+        </ListItemIcon>
         <ListItemText primary={category} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>

@@ -9,6 +9,8 @@ import { Avatar } from '@material-ui/core'
 import logo from './logo.png'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const useStyles = makeStyles(styles)
 
@@ -26,6 +28,15 @@ const changeLanguge = (lan) => {
 function NavbarWithoutAuth({ children, brandPath }) {
   const classes = useStyles()
 
+  // Language Bar Toggle
+  const [anchorElLang, setAnchorElLang] = React.useState(null)
+  const handleClick = (event) => {
+    setAnchorElLang(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorElLang(null)
+  }
+
   return (
     <AppBar position="static" className={classes.appBar}>
       <Toolbar>
@@ -36,12 +47,37 @@ function NavbarWithoutAuth({ children, brandPath }) {
           component={Link}
           to={brandPath || '/'}
         />
-        <div className={classes.flex}>
-          <ButtonGroup size="small" aria-label="small outlined button group">
+        <div className={classes.langMenu}>
+          <ButtonGroup
+            size="small"
+            aria-label="small outlined button group"
+            className={classes.langExpand}>
             <Button onClick={changeLanguge('en')}>English</Button>
             <Button onClick={changeLanguge('si')}>සිංහල</Button>
             <Button onClick={changeLanguge('ta')}>தமிழ்</Button>
           </ButtonGroup>
+
+          {/* Collpse Menu */}
+          <div className={classes.langCollapse}>
+            <Button
+              size="small"
+              variant="outlined"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}>
+              Language
+            </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorElLang}
+              keepMounted
+              open={Boolean(anchorElLang)}
+              onClose={handleClose}>
+              <MenuItem onClick={changeLanguge('en')}>English</MenuItem>
+              <MenuItem onClick={changeLanguge('si')}>සිංහල</MenuItem>
+              <MenuItem onClick={changeLanguge('ta')}>தமிழ்</MenuItem>
+            </Menu>
+          </div>
         </div>
         {children}
       </Toolbar>

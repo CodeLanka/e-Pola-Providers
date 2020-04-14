@@ -1,4 +1,4 @@
-export default () => ({
+export default (theme) => ({
   flex: {
     flexGrow: 1
   },
@@ -16,5 +16,25 @@ export default () => ({
   brandLogo: {
     marginRight: '1em',
     width: '140px'
+  },
+  langMenu: {
+    flexGrow: 1,
+    flexDirection: 'row'
+  },
+  langExpand: {
+    [theme.breakpoints.down(600)]: {
+      display: 'none'
+    },
+    [theme.breakpoints.up(600)]: {
+      display: 'inline-flex'
+    }
+  },
+  langCollapse: {
+    [theme.breakpoints.down(600)]: {
+      display: 'inline-flex'
+    },
+    [theme.breakpoints.up(600)]: {
+      display: 'none'
+    }
   }
 })
