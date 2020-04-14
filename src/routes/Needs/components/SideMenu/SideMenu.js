@@ -36,7 +36,7 @@ function Category(props) {
   return (
     <>
       <ListItem button onClick={props.onClick}>
-        <ListItemIcon>
+        <ListItemIcon className={classes.filterIcon}>
           <Image
             src={'/img/' + category + '.svg'}
             imageStyle={{
@@ -95,7 +95,7 @@ export default function SideMenu(props) {
   const classes = useStyles()
   const [openCategories, setOpenCategories] = React.useState(new Map())
   const categories = {
-    meat: 'Meat,Saefood & Poultry',
+    meat: 'Meat,Seafood & Poultry',
     dairy: 'Dairy',
     grocery: 'Grocery',
     grains: 'Grains',
@@ -124,11 +124,19 @@ export default function SideMenu(props) {
         </ListSubheader>
       }
       className={classes.root}>
-      <ListItem>
-        <TextField label="Area" variant="outlined" />
+      <ListItem className={classes.formCollapse}>
+        <TextField
+          label="Area"
+          variant="outlined"
+          className={classes.formInput}
+        />
       </ListItem>
-      <ListItem>
-        <TextField label="Suburb" variant="outlined" />
+      <ListItem className={classes.formCollapse}>
+        <TextField
+          label="Suburb"
+          variant="outlined"
+          className={classes.formInput}
+        />
       </ListItem>
       {Object.keys(categories).map((category) => (
         <Category

@@ -151,13 +151,13 @@ function NeedsList() {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={2} className={classes.sideMenu}>
+      <Grid item xs={12} sm={2} className={classes.sideMenu}>
         <SideMenu
           selectedProducts={selectedProducts}
           onSelectedProductsChange={handleSelectedProductsChange}
         />
       </Grid>
-      <Grid item xs={10} className={classes.main}>
+      <Grid item xs={12} sm={10} className={classes.main}>
         <AssignNeedDialog
           onSubmit={addDelivery}
           open={assignNeedsDialogOpen}

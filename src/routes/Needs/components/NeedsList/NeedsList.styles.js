@@ -7,7 +7,8 @@ export default (theme) => ({
     // overflowY: 'scroll'
   },
   sideMenu: {
-    background: '#fbfbfb'
+    background: '#fbfbfb',
+    textAlign: 'center'
   },
   main: {
     padding: '0 !important'
