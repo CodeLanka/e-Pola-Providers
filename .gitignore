@@ -12,6 +12,7 @@
 build
 src/config.js
 .env
+.local
 
 #Firebase cache
 .firebase/**

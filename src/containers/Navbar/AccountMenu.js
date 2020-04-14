@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
   button: {
     textTransform: 'none',
     marginLeft: '10px',
-    [theme.breakpoints.down(600)]: {
+    [theme.breakpoints.down(715)]: {
       display: 'none'
     },
-    [theme.breakpoints.up(600)]: {
+    [theme.breakpoints.up(715)]: {
       display: 'inline-flex'
     }
   },
@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '5px'
   },
   buttonCollapse: {
-    [theme.breakpoints.down(600)]: {
+    [theme.breakpoints.down(715)]: {
       display: 'inline-flex'
     },
-    [theme.breakpoints.up(600)]: {
+    [theme.breakpoints.up(715)]: {
       display: 'none'
     }
   }
